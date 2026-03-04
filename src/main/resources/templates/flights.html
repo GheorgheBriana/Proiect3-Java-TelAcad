@@ -66,21 +66,34 @@
                     <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
                             <div class="form-row clearfix pl-2 pr-2 tm-fx-col-xs">
                                 <form th:action="@{/handleForm}" method="post">
+<!-- BEFORE -->
+<!--                                    <ul th:each="flight,idx: ${flights}">-->
+<!--                                        <li>-->
+<!--&lt;!&ndash;                                                <div >&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input type="checkbox" name ="values" th:value="${flight}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <label th:text="${flight.destination}"></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                </div>&ndash;&gt;-->
 
-                                    <ul th:each="flight,idx: ${flights}">
-                                        <li>
-<!--                                                <div >-->
-<!--                                                    <input type="checkbox" name ="values" th:value="${flight}">-->
-<!--                                                    <label th:text="${flight.destination}"></label>-->
-<!--                                                </div>-->
+<!--                                            <div >-->
+<!--                                                <input type="checkbox" name ="values" th:value="${idx.index}">-->
+<!--                                                <label th:text="${flight.arrivalDate}"></label>-->
+<!--                                            </div>-->
 
-                                            <div >
-                                                <input type="checkbox" name ="values" th:value="${idx.index}">
-                                                <label th:text="${flight.arrival}"></label>
+<!--                                        </li>-->
+<!--                                    </ul>-->
+                                    <!-- MODIFICATIONS START HERE -->
+                                    <ul th:each="flight : ${flights}" style="list-style-type: none; padding: 0;">
+                                        <li style="background: rgba(255,255,255,0.9); margin-bottom: 10px; padding: 10px; border-radius: 5px; text-align: left;">
+                                            <div>
+                                                <input type="checkbox" name="values" th:value="${flight.id}" style="margin-right: 10px;">
+
+                                                <label style="color: black; font-weight: bold; cursor: pointer;"
+                                                       th:text="${flight.city + ' | ' + flight.airline + ' | Plecare: ' + flight.departureDate}"></label>
                                             </div>
-
                                         </li>
                                     </ul>
+                                    <!-- MODIFICATIONS ENDS HERE -->
+
                                     <div class="form-group tm-form-element tm-form-element-2">
                                         <button type="submit" class="btn btn-primary tm-btn-search">Get flights</button>
                                     </div>

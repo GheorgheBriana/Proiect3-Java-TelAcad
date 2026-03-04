@@ -55,22 +55,22 @@
             <div class="container ie-h-align-center-fix">
                 <div class="row">
                     <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
-                        <form th:action="@{/register}" method="get" class="tm-search-form tm-section-pad-2">
+                        <form th:action="@{/register}" method="post" class="tm-search-form tm-section-pad-2">
                             <div class="form-row tm-search-form-row">
                                 <div class="container">
                                         <div>
                                             <label ><b>Username</b></label>
-                                            <input th:name="uname" type="text" class ="form-group" placeholder="Enter Username" name="uname" required>
+                                            <input th:name="username" type="text" class ="form-group" placeholder="Enter Username" name="username" required>
                                         </div>
                                         <div>
                                             <label ><b>Password</b></label>
-                                            <input  th:name="psw"  type="password" class ="form-group" placeholder="Enter Password" name="psw" required>
+                                            <input  th:name="password"  type="password" class ="form-group" placeholder="Enter Password" name="password" required>
                                         </div>
                                         <div>
                                             <button type="submit" class="btn btn-primary tm-btn-search" >Register</button>
                                         </div>
                                         <div class="form-group mb-3">
-                                            <span> Not registered ?
+                                            <span> Already registered?
                                              <a th:href="@{/login}">Log In here</a>
                                             </span>
                                         </div>
