@@ -1,6 +1,8 @@
 package com.telacad.proiect3.repository;
 
 import com.telacad.proiect3.pojo.User;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +23,15 @@ public class UserRepository {
         String sql = "SELECT COUNT(*) FROM USERS WHERE username = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, username);
         return count != null && count > 0;
+    }
+
+    public User findByUsernameAndPassword(String username, String password) {
+        String sql ="SELECT * FROM USERS WHERE username = ? AND password = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 
