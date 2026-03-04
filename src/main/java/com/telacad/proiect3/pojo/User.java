@@ -1,4 +1,4 @@
-package pojo;
+package com.telacad.proiect3.pojo;
 
 public class User {
     private int id;

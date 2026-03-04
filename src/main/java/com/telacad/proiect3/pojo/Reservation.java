@@ -1,4 +1,4 @@
-package pojo;
+package com.telacad.proiect3.pojo;
 
 public class Reservation {
     private int idUser;

@@ -1,4 +1,4 @@
-package config;
+package com.telacad.proiect3.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package pojo;
+package com.telacad.proiect3.pojo;
 
 public class Flight {
     private int id;
