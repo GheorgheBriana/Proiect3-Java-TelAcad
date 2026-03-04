@@ -17,4 +17,8 @@ public class FlightService {
     public List<Flight> getAllFlights() {
         return flightRepository.getAllFlights();
     }
+
+    public List<Flight> findFlights(String city, String departureDate) {
+        return flightRepository.findFlights(city, departureDate);
+    }
 }

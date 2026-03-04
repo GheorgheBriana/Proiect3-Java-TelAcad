@@ -66,6 +66,10 @@
                     <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
                             <div class="form-row clearfix pl-2 pr-2 tm-fx-col-xs">
                                 <form th:action="@{/handleForm}" method="post">
+                                    <p th:if="${message}" th:text="${message}" style="color:red; font-weight:600;"></p>
+                                    <input type="hidden" name="adults" th:value="${adults}">
+                                    <input type="hidden" name="children" th:value="${children}">
+
 <!-- BEFORE -->
 <!--                                    <ul th:each="flight,idx: ${flights}">-->
 <!--                                        <li>-->
@@ -232,8 +236,8 @@
         loadGoogleMap();
 
         // Date Picker
-        const pickerCheckIn = datepicker('#inputCheckIn');
-        const pickerCheckOut = datepicker('#inputCheckOut');
+        // const pickerCheckIn = datepicker('#inputCheckIn');
+        //const pickerCheckOut = datepicker('#inputCheckOut');
 
         // Slick carousel
         setCarousel();

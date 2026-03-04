@@ -19,4 +19,10 @@ public class FlightRepository {
         String sql = "SELECT * FROM FLIGHTS";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Flight.class));
     }
+
+    public List<Flight> findFlights(String city, String departureDate) {
+        String sql = " SELECT * FROM FLIGHTS WHERE city LIKE ? AND departure_date = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Flight.class),
+                "%" + city + "%", departureDate);
+    }
 }

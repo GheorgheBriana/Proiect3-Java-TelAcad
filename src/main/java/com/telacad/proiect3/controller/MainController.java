@@ -1,5 +1,6 @@
 package com.telacad.proiect3.controller;
 
+import com.telacad.proiect3.pojo.Flight;
 import com.telacad.proiect3.pojo.User;
 import com.telacad.proiect3.service.FlightService;
 import com.telacad.proiect3.service.ReservationService;
@@ -77,9 +78,25 @@ public class MainController {
         return "redirect:/";
     }
 
-    @GetMapping("/flights")
-    public String home(Model model) {
-        model.addAttribute("flights", flightService.getAllFlights());
+    @GetMapping("/searchFlights")
+    public String searchFlights (@RequestParam String city,
+                                @RequestParam("checkIn") String departureDate,
+                                @RequestParam int adults,
+                                @RequestParam int children,
+                                HttpSession session,
+                                Model model) {
+
+        List<Flight> flights = flightService.findFlights(city, departureDate);
+
+        if (flights.isEmpty()) {
+            model.addAttribute("message", "No flights found for your selection.");
+        }
+        session.setAttribute("adults", adults);
+        session.setAttribute("children", children);
+
+        model.addAttribute("flights", flights);
+        model.addAttribute("adults", adults);
+        model.addAttribute("children", children);
         return "flights";
     }
 

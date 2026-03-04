@@ -4,7 +4,7 @@ public class Flight {
     private int id;
     private String city;
     private String departureDate;
-    private String arrivalDate;
+    //private String arrivalDate;
     private String airline;
 
     // Constructors
@@ -12,7 +12,7 @@ public class Flight {
         this.id = id;
         this.city = city;
         this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
+        //this.arrivalDate = arrivalDate;
         this.airline = airline;
     }
 
@@ -43,7 +43,7 @@ public class Flight {
     public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
-
+/*
     public String getArrivalDate() {
         return arrivalDate;
     }
@@ -51,7 +51,7 @@ public class Flight {
     public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
-
+*/
     public String getAirline() {
         return airline;
     }
@@ -67,7 +67,7 @@ public class Flight {
                 "id=" + id +
                 ", city='" + city + '\'' +
                 ", departureDate='" + departureDate + '\'' +
-                ", arrivalDate='" + arrivalDate + '\'' +
+                /*", arrivalDate='" + arrivalDate + '\'' + */
                 ", airline='" + airline + '\'' +
                 '}';
     }
