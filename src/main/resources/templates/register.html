@@ -58,9 +58,10 @@
                         <form th:action="@{/register}" method="post" class="tm-search-form tm-section-pad-2">
                             <div class="form-row tm-search-form-row">
                                 <div class="container">
-                                        <div>
+                                    <p th:if="${error}" th:text="${error}" style="color:red; font-weight:600;"></p>
+                                    <div>
                                             <label ><b>Username</b></label>
-                                            <input th:name="username" type="text" class ="form-group" placeholder="Enter Username" name="username" required>
+                                            <input name="username" type="text" class ="form-group" placeholder="Enter Username" required th:value="${username}">">
                                         </div>
                                         <div>
                                             <label ><b>Password</b></label>

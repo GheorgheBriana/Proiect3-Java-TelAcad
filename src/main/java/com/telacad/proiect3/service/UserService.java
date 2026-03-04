@@ -12,8 +12,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void register(User user) {
-        // method from repository
+    public boolean register(User user) {
+        if(userRepository.existsByUsername(user.getUsername())) {
+            return false;
+        }
+
         userRepository.addUser(user);
+
+        return true;
     }
 }

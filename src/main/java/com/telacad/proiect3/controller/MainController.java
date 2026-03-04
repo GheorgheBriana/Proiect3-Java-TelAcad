@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -37,11 +38,19 @@ public class MainController {
         return "register";
     }
 
+    // post registe, add repository verify username.
     @PostMapping("/register")
-    public String register(User user) {
-        userService.register(user);
+    public String register(User user, Model model) {
+        boolean created = userService.register(user);
+
+        if(!created) {
+            model.addAttribute("error", "Username already exists");
+            model.addAttribute("username", user.getUsername());
+            return "register";
+        }
+
         System.out.println("Account created for: " + user.getUsername());
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/flights")
@@ -62,7 +71,7 @@ public class MainController {
                 reservationService.addReservation(1, Integer.parseInt(id), adults, children);
             }
         }
-        return "redirect:/index";
+        return "redirect:/login";
 
     }
 
