@@ -12,8 +12,8 @@ public class ReservationRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addReservation(Reservation reservation) {
+    public void addReservation(int userID, int flightID, int adults, int children) {
         String sql = "INSERT INTO RESERVATIONS(id_user, id_zbor, number_of_childrens, number_of_adults) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, reservation.getIdUser(), reservation.getIdZbor(), reservation.getNumberOfChildrens(), reservation.getNumberOfAdults());
+        jdbcTemplate.update(sql, userID, flightID, adults, children);
     }
 }

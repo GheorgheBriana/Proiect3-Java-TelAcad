@@ -1,23 +1,30 @@
 package com.telacad.proiect3.controller;
 
-import com.telacad.proiect3.pojo.Flight;
 import com.telacad.proiect3.pojo.User;
-import com.telacad.proiect3.repository.FlightRepository;
-import com.telacad.proiect3.repository.UserRepository;
+import com.telacad.proiect3.service.FlightService;
+import com.telacad.proiect3.service.ReservationService;
+import com.telacad.proiect3.service.UserService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MainController {
 
-    private FlightRepository flightRepository;
-    private UserRepository userRepository;
+    private FlightService flightService ;
+    private UserService userService;
+    private ReservationService reservationService;
 
-    public MainController(FlightRepository flightRepository, UserRepository userRepository) {
-        this.flightRepository = flightRepository;
-        this.userRepository = userRepository;
+    public MainController(FlightService flightService, UserService userService, ReservationService reservationService) {
+        this.flightService = flightService;
+        this.userService = userService;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("/")
@@ -25,25 +32,43 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/flights")
-    public String home(Model model) {
-        model.addAttribute("flights", flightRepository.getAllFlights());
-        return "flights";
-    }
-
-    @PostMapping("/register")
-    public String register(User user) {
-
-        // save 'user' object in MySQL
-        userRepository.addUser(user);
-        System.out.println("Account created for: " + user.getUsername());
-        return "redirect:/";
-    }
-
     @GetMapping("/register")
     public String showRegisterPage() {
         return "register";
     }
+
+    @PostMapping("/register")
+    public String register(User user) {
+        userService.register(user);
+        System.out.println("Account created for: " + user.getUsername());
+        return "redirect:/";
+    }
+
+    @GetMapping("/flights")
+    public String home(Model model) {
+        model.addAttribute("flights", flightService.getAllFlights());
+        return "flights";
+    }
+
+    @PostMapping("/handleForm")
+    public String handleForm(
+            @RequestParam(value = "values", required = false) List<String> selectedIds,
+            @RequestParam int adults,
+            @RequestParam int children,
+            HttpSession session) {
+        if(selectedIds != null) {
+            for(String id : selectedIds) {
+                System.out.println("User selected Flight ID " + id);
+                reservationService.addReservation(1, Integer.parseInt(id), adults, children);
+            }
+        }
+        return "redirect:/index";
+
+    }
+
+
+
+
 
 
 }
