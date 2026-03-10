@@ -84,14 +84,37 @@
                     </p>
                   </div>
 
-                  <!--
                   <div style="margin-bottom: 25px;">
                     <p>
                       <strong>Total reservations:</strong>
                       <span th:text="${reservationCount}">0</span>
                     </p>
                   </div>
-                  -->
+
+                  <div style="margin-top: 30px;">
+                    <h3>My Reservations</h3>
+
+                    <div th:if="${reservationCount == 0}">
+                      <p>You have no reservations yet.</p>
+                    </div>
+
+                    <table th:if="${reservationCount > 0}" class="table table-bordered">
+                      <thead>
+                      <tr>
+                        <th>Flight ID</th>
+                        <th>Adults</th>
+                        <th>Children</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="reservation : ${reservations}">
+                        <td th:text="${reservation.idZbor}">1</td>
+                        <td th:text="${reservation.numberOfAdults}">0</td>
+                        <td th:text="${reservation.numberOfChildrens}">0</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
 
                   <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                     <a th:href="@{/}" class="btn btn-primary tm-btn-search">Back to Home</a>

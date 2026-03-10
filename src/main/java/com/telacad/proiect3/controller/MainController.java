@@ -1,6 +1,7 @@
 package com.telacad.proiect3.controller;
 
 import com.telacad.proiect3.pojo.Flight;
+import com.telacad.proiect3.pojo.Reservation;
 import com.telacad.proiect3.pojo.User;
 import com.telacad.proiect3.service.FlightService;
 import com.telacad.proiect3.service.ReservationService;
@@ -132,9 +133,13 @@ public class MainController {
             return "redirect:/login";
         }
 
+        List<Reservation> reservations = reservationService.findReservationByUserId(userId);
+
         // legatura intre controller si html
         model.addAttribute("userId", userId);
         model.addAttribute("username", username);
+        model.addAttribute("reservations", reservations);
+        model.addAttribute("reservationCount", reservations.size());
         return "profile";
     }
 
