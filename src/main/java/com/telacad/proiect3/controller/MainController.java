@@ -122,6 +122,22 @@ public class MainController {
 
     }
 
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model) {
+        // vedem daca userul e logat
+        Integer userId = (Integer) session.getAttribute("currentUserID");
+        String username = (String) session.getAttribute("currentUsername");
+
+        if(userId == null) {
+            return "redirect:/login";
+        }
+
+        // legatura intre controller si html
+        model.addAttribute("userId", userId);
+        model.addAttribute("username", username);
+        return "profile";
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // sterge tot din sesiune (userId, username, password
