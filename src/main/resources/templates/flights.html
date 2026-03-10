@@ -53,6 +53,18 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#top">Home <span class="sr-only">(current)</span></a>
                             </li>
+                            <li class="nav-item" th:if="${session.currentUserID != null}">
+                                <span class="nav-link" style="white-space: nowrap;">
+                                    <span th:text="'Logged in as: ' + ${session.currentUsername}"></span>
+                                        &nbsp;|&nbsp;
+                                    <form th:action="@{/logout}" method="get" style="display:inline; margin:0;">
+                                        <button type="submit"
+                                                style="background:none;border:none;padding:0;color:inherit;cursor:pointer;text-decoration:underline;">
+                                            Press to Logout
+                                        </button>
+                                    </form>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -96,7 +108,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <!-- MODIFICATIONS ENDS HERE -->
+                                    <!-- MODIFICATIONS END HERE -->
 
                                     <div class="form-group tm-form-element tm-form-element-2">
                                         <button type="submit" class="btn btn-primary tm-btn-search">Get flights</button>

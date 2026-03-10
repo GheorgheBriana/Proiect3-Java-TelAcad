@@ -81,8 +81,8 @@ public class MainController {
     @GetMapping("/searchFlights")
     public String searchFlights (@RequestParam String city,
                                 @RequestParam("checkIn") String departureDate,
-                                @RequestParam int adults,
-                                @RequestParam int children,
+                                @RequestParam(defaultValue = "0") int adults,
+                                @RequestParam(defaultValue = "0") int children,
                                 HttpSession session,
                                 Model model) {
 
@@ -103,8 +103,8 @@ public class MainController {
     @PostMapping("/handleForm")
     public String handleForm(
             @RequestParam(value = "values", required = false) List<String> selectedIds,
-            @RequestParam int adults,
-            @RequestParam int children,
+            @RequestParam(defaultValue = "0") int adults,
+            @RequestParam(defaultValue = "0") int children,
             HttpSession session) {
 
         Integer userId = (Integer) session.getAttribute("currentUserID");
@@ -120,6 +120,12 @@ public class MainController {
         }
         return "redirect:/";
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // sterge tot din sesiune (userId, username, password
+        return "redirect:/login";
     }
 
 
