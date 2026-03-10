@@ -34,6 +34,10 @@ public class UserRepository {
         }
     }
 
-
-
+    public void deleteUserById(int id) {
+        String sql = "DELETE FROM USERS WHERE id = ?";
+        jdbcTemplate.update(sql,id);
+        String sqlReservations = "DELETE FROM RESERVATIONS WHERE id_user = ?";
+        jdbcTemplate.update(sqlReservations, id);
+    }
 }

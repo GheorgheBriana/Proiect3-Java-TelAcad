@@ -140,13 +140,23 @@ public class MainController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // sterge tot din sesiune (userId, username, password
+        session.invalidate(); // sterge tot din sesiune (userId, username, password)
         return "redirect:/login";
     }
 
+    @PostMapping("/deleteAccount")
+    public String deleteAccount(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("currentUserID");
 
+        if(userId == null) {
+            return "redirect:/login";
+        }
 
+        userService.deleteUserById(userId);
+        session.invalidate();
 
+        return "redirect:/register";
+    }
 
 
 }
